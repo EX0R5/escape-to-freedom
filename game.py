@@ -12,8 +12,6 @@ class Game:
         name = input("Enter your name: ")
         # make a player
 
-    def add_player(self):
-
     def is_gameover(self):
 
     def get_options(self):
