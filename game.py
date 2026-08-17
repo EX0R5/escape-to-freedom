@@ -1,2 +1,21 @@
 class Game:
-    pass
+    """
+    Initiates game functions and attributes.
+
+    Attributes: None
+    """
+    def __init__(self):
+
+    def welcome(self):
+
+    def add_player(self):
+
+    def is_gameover(self):
+
+    def get_options(self):
+
+    def choose_option(self):
+
+    def execute_option(self):
+
+    def epilogue(self):
