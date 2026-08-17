@@ -3,7 +3,7 @@
 ## Members
 
 - Brian
-- Member 2
+- Enoch
 - Member 3
 - Member 4
 
