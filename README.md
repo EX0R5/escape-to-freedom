@@ -2,7 +2,7 @@
 
 ## Members
 
-- Member 1
+- Zhengyou
 - Member 2
 - Member 3
 - Member 4
