@@ -5,8 +5,12 @@ class Game:
     Attributes: None
     """
     def __init__(self):
+        self.player = None
 
     def welcome(self):
+        print("Welcome to Escape to Freedom!")
+        name = input("Enter your name: ")
+        # make a player
 
     def add_player(self):
 
