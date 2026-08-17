@@ -2,7 +2,7 @@
 
 ## Members
 
-- Member 1
+- Enoch Tang
 - Member 2
 - Member 3
 - Member 4
