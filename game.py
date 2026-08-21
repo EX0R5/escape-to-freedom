@@ -5,7 +5,7 @@ class Game:
     Attributes: None
     """
     def __init__(self):
-        self.player = None
+        self._player = None
 
     def welcome(self):
         print("Welcome to Escape to Freedom!")
