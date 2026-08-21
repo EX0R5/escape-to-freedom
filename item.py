@@ -1,22 +1,22 @@
 class Item:
   def __init__(self, name: str, description: str):
-    self.name = name
-    self.description = description
+    self._name = name
+    self._description = description
 
 class Map(Item):
    def __init__(self, name: str, description: str, vicinity: int):
      super().__init__(name, description)
-     self.vicinity = vicinity
+     self._vicinity = vicinity
 
 class Weapon(Item):
   def __init__(self, name: str, description: str, damage: int):
      super().__init__(name, description)
-     self.damage = damage
+     self._damage = damage
     
 class HealthItem(Item):
   def __init__(self, name: str, description: str, heal: int):
     super().__init__(name, description)
-    self.heal = heal
+    self._heal = heal
 
 class StealthItem(Item):
   def __init__(self, name: str, description: str):
