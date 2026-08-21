@@ -12,9 +12,13 @@ class Game:
         name = input("Enter your name: ")
         # make a player
 
+    def setup(self):
+    
     def is_gameover(self):
 
     def get_options(self):
+
+    def display_options(self):
 
     def choose_option(self):
 
