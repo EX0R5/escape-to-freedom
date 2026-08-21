@@ -10,6 +10,7 @@ import game
 if __name__ == "__main__":
     mud = game.Game()
     mud.welcome()
+    mud.setup()
     while not mud.is_gameover():
         choices = mud.get_options()  # retrieve options as List[str]
         mud.display_options(choices)  # display
