@@ -18,7 +18,7 @@ class File:
   def read(self) -> None:
     data = []
     with open(self.get_name()) as f:
-      reader = csv.reader()
+      reader = csv.DictReader(f)
       for row in reader:
         data.append(row)
 
