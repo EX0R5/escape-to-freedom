@@ -1,4 +1,5 @@
 import person
+import file
 
 class Game:
     """
@@ -22,6 +23,15 @@ class Game:
         # make a player
 
     def setup(self):
+        room_data = file.read_file("room_data.csv")
+
+        player_data = file.read_file("player_data.csv")
+
+        npc_data = file.read_file("npc.csv")
+
+        items_data = file.read_file("items.csv")
+
+        enemy_data = file.read_file("enemy data.csv")
     
     def is_gameover(self):
 
