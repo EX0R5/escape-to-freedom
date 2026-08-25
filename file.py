@@ -7,6 +7,6 @@ def read_file(file: str) ->list:
         list: The data contained in the file.
     """
   with open (file, "r") as f:
-    reader = csv.reader(f)
+    reader = csv.DictrReader(f)
     data = list(reader)
   return data
