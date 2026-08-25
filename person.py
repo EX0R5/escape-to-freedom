@@ -54,3 +54,20 @@ class Player(Combatter):
         self._weapon = weapon
         self._sus = sus
         self._max_sus = max_sus
+
+class Boss(Combatter):
+    """
+    Defines the Boss
+
+    Attributes:
+        _entry_text (str): Text displayed when the player encounters the boss
+        _escape_text (str): Text displayed when the player escapes from the boss
+        _attack_text (str): Text displayed when the boss attacks the player
+        _defeat_text (str): Text displayed when the player defeats the boss
+    """
+    def __init__(self, entry_text: str, escape_text: str, attack_text: str, defeat_text: str):
+        super().__init__(name, current_room, hp, max_hp, damage)
+        self._entry_text = entry_text
+        self._escape_text = escape_text
+        self._attack_text = attack_text
+        self._defeat_text = defeat_text
