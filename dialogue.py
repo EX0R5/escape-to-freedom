@@ -13,3 +13,15 @@ class Dialogue:
         self._gift_item = gift_item
         self._added_sus = added_sus
         self._options = options
+
+    def get_display_text(self) -> str:
+        return self._display_text
+
+    def get_gift_item(self) -> Item:
+        return self._gift_item
+
+    def get_added_sus(self) -> int:
+        return self._added_sus
+
+    def get_options(self) -> List[Dialogue]:
+        return self._options
