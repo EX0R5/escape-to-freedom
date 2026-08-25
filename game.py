@@ -1,4 +1,5 @@
 import person
+import display
 
 class Game:
     """
@@ -19,7 +20,7 @@ class Game:
     def welcome(self):
         print("Welcome to Escape to Freedom!")
         name = input("Enter your name: ")
-        # make a player
+        # self.set_player(person.Player(name))
 
     def setup(self):
     
@@ -27,7 +28,23 @@ class Game:
 
     def get_options(self):
 
-    def display_options(self):
+    def display_options(self, options: List[str]) -> None:
+        """
+        Displays the options to the player.
+
+        Attributes:
+        options (List[str]): list of options to display
+        """
+        display.screenbreak("=")
+        display.smart_print(self.get_player().get_current_room().get_name())
+        display.screenbreak("=")
+        # check for npcs and bosses
+        display.smart_print(self.get_player().get_current_room().get_description(), 2)
+        display.smart_print("")
+        display.smart_print("Exits:")
+        for exit in self.get_player().get_current_room().get_exits():
+            display.smart_print(f"[{exit.keys()}] {exit.values().get_name()}", 2)
+
 
     def choose_option(self):
 
