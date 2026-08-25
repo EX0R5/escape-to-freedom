@@ -14,7 +14,7 @@ def smart_print(s: str, indent: int=0) -> None:
     for i in range(math.ceil(len(s) / empty_char)):
         print(" " * indent + s[i * empty_char : (i + 1) * empty_char])
 
-def screenbreak(c: char) -> None:
+def screenbreak(c: str) -> None:
     """
     Prints a screenbreak.
 

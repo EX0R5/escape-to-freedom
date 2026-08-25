@@ -1,5 +1,5 @@
 class Maze:
-    def __init__(self, rooms: List[Room], start_room: Room, monster: Monster):
+    def __init__(self, rooms: list[Room], start_room: Room, monster: Monster):
         """
         Defines a Maze.
 
@@ -24,11 +24,12 @@ class Room:
     bosses (List[Boss]): bosses found in room
     items (List[Items]): items found in room
     """
-    def __init__(self, name: str, description: str, sus_on_path: int, exits: Dict[str, Room],
+    def __init__(self, id: str, name: str, description: str, sus_on_path: int, exits: Dict[str, Room],
                bosses: List[Boss], items: List[Items]) -> None:
-    self._name = name
-    self._description = description
-    self._sus_on_path = sus_on_path
-    self._exits = exits
-    self._bosses = bosses
-    self._items = items    
+        self._id = id
+        self._name = name
+        self._description = description
+        self._sus_on_path = sus_on_path
+        self._exits = exits
+        self._bosses = bosses
+        self._items = items    
