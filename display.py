@@ -1,6 +1,6 @@
 import math
 
-SCREEN_WIDTH = 60
+SCREEN_WIDTH = 100
 
 def smart_print(s: str, indent: int=0) -> None:
     """
@@ -22,3 +22,24 @@ def screenbreak(c: str) -> None:
     c (char): character to be used for screenbreak
     """
     print(SCREEN_WIDTH * c)
+
+def smart_input(type_wanted: type) -> type:
+    """
+    Gets input from user, but checks if it is of the correct type.
+
+    Attributes:
+    type_wanted (type): type of input expected from user
+
+    Returns:
+    the final input, converted to the correct type
+    """
+    while True:
+        x = input("> ")
+        if type_wanted == str:
+            return x
+        if type_wanted == int:
+            if not x.isdigit():
+                print("Please enter a valid number.")
+                continue
+            return int(x)
+        print("Not implemented yet")
