@@ -8,15 +8,27 @@ class Game:
 
     Attributes:
     player (person.Player): the player
+    room_data (List[Room]): list of room data
+    npc_data (List[NPC]): list of npc data
+    items_data (List[Item]): list of item data
+    enemy_data (List[Enemy]): list of enemy data
     """
     def __init__(self) -> None:
         self._player = None
+        self._room_data = None
+        self._npc_data = None
+        self._items_data = None
+        self._enemy_data = None
 
     def get_player(self) -> person.Player:
         return self._player
 
-    def set_player(self, player: person.Player) -> None:
-        self._player = player
+    def set_player(self, player_name: str) -> None:
+        player_data = file.read_file("player_data.csv")
+        #self, name, current_room, hp, max_hp, damage, weapon, sus, max_sus
+        self._player = person.Player(player_name, player_data[])
+
+    
         
     def welcome(self):
         print("Welcome to Escape to Freedom!")
