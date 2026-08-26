@@ -32,4 +32,4 @@ class Room:
         self._sus_on_path = sus_on_path
         self._exits = exits
         self._bosses = bosses
-        self._items = items    
+        self._items = items
