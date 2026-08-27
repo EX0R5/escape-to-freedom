@@ -11,6 +11,11 @@ class Maze:
         monster (Monster): the monster in the maze
         """
         self._rooms = rooms
+        for room_key in rooms:
+            room = rooms[room_key]
+            exits = room.get_exits()
+            for exit_key in exits:
+                exits[exit_key] = rooms[exits[exit_key]]
         self._start_room = start_room
         self._monster = monster
 

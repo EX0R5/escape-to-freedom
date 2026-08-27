@@ -11,8 +11,15 @@ def smart_print(s: str, indent: int=0) -> None:
     indent (int): any indentation needed for each line
     """
     empty_char = SCREEN_WIDTH - indent
-    for i in range(math.ceil(len(s) / empty_char)):
-        print(" " * indent + s[i * empty_char : (i + 1) * empty_char])
+    if len(s) <= empty_char:
+        print(" " * indent + s)
+        return
+    temp = s[:empty_char]
+    for i in range(len(temp) - 1, -1, -1):
+        if temp[i] == " ":
+            print(" " * indent + temp[:i])
+            smart_print(s[i + 1:], indent)
+            return
 
 def screenbreak(c: str) -> None:
     """
@@ -43,3 +50,9 @@ def smart_input(type_wanted: type) -> type:
                 continue
             return int(x)
         print("Not implemented yet")
+
+def print_new_line() -> None:
+    """
+    Prints a new line.
+    """
+    print(" ")

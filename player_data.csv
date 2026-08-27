@@ -1,2 +1,2 @@
-﻿ID,Name,HP,MaxHP,Weapon,Sus,MaxSus,CurrentRoom,Inventory1,Inventory2,Inventory3,Inventory4,Inventory5
-None,None,20,20,Fists,0,10,plantation,None,None,None,None,None
+﻿ID,Name,HP,MaxHP,Damage,Weapon,Sus,MaxSus,CurrentRoom,Inventory1,Inventory2,Inventory3,Inventory4,Inventory5
+None,None,20,20,1,Fists,0,10,plantation,None,None,None,None,None
