@@ -87,9 +87,6 @@ class Combatter(Person):
     def get_max_hp(self) -> int:
         return self._max_hp
 
-    def set_max_hp(self, max_hp: int) -> None:
-        self._max_hp = max_hp
-
     def get_damage(self) -> int:
         return self._damage
 
@@ -126,9 +123,6 @@ class Player(Combatter):
     def get_max_sus(self) -> int:
         return self._max_sus
 
-    def set_max_sus(self, max_sus: int) -> None:
-        self._max_sus = max_sus
-
 class Boss(Combatter):
     """
     Defines the Boss
@@ -149,26 +143,14 @@ class Boss(Combatter):
     def get_entry_text(self) -> str:
         return self._entry_text
 
-    def set_entry_text(self, entry_text: str) -> None:
-        self._entry_text = entry_text
-
     def get_escape_text(self) -> str:
         return self._escape_text
-
-    def set_escape_text(self, escape_text: str) -> None:
-        self._escape_text = escape_text
 
     def get_attack_text(self) -> str:
         return self._attack_text
 
-    def set_attack_text(self, attack_text: str) -> None:
-        self._attack_text = attack_text
-
     def get_defeat_text(self) -> str:
         return self._defeat_text
-
-    def set_defeat_text(self, defeat_text: str) -> None:
-        self._defeat_text = defeat_text
 
 class Monster(Boss):
     """
