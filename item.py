@@ -10,6 +10,12 @@ class Item:
         self._name = name
         self._description = description
 
+    def get_name(self) -> str:
+        return self._name
+
+    def get_description(self) -> str:
+        return self._description    
+
 class Map(Item):
     """
     Defines a map.
@@ -21,6 +27,9 @@ class Map(Item):
         super().__init__(name, description)
         self._vicinity = vicinity
 
+    def get_vicinity(self) -> int:
+        return self._vicinity
+
 class Weapon(Item):
     """
     Defines a weapon.
@@ -31,6 +40,9 @@ class Weapon(Item):
     def __init__(self, name: str, description: str, damage: int) -> None:
         super().__init__(name, description)
         self._damage = damage
+
+    def get_damage(self) -> int:
+        return self._damage
     
 class HealthItem(Item):
     """
@@ -43,6 +55,10 @@ class HealthItem(Item):
         super().__init__(name, description)
         self._heal = heal
 
+    def get_heal(self) -> int:
+        return self._heal
+
 class StealthItem(Item):
-  def __init__(self, name: str, description: str):
-    super().__init__(name, description)
+    def __init__(self, name: str, description: str):
+        super().__init__(name, description)
+

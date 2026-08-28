@@ -2,6 +2,7 @@ import person
 import file
 import display
 import maze
+import item
 
 FIRST_ROOM = "plantation"
 MONSTER_ROOM = "final_port"
@@ -53,6 +54,15 @@ class Game:
         player_data = file.read_file("player_data.csv")
         player = person.Player(player_data["Name"], self.get_maze().get_start_room(), int(player_data["HP"]), int(player_data["MaxHP"]), int(player_data["Damage"]), player_data["Weapon"], player_data["Sus"], player_data["MaxSus"])
         self.set_player(player)
+        item_data = file.read_file("items.csv")
+        for item_entry in item_data:
+            #id,item_name,type,effect,value,room
+            if item_entry["type"] == "Weapon":
+                rooms[item_entry["room"]] = item.Weapon(item_entry["item_name"], None, item_entry["value"])
+            elif item_entry["type"] == "Heal":
+                rooms[item_entry["room"]] = item.HealthItem(item_entry["item_name"], None, item_entry["value"])
+            elif item_entry["type"] == "Stealth":
+                rooms[item_entry["room"]] = item.StealthItem(item_entry["item_name"], None)
 
     def is_gameover(self):
         if self.get_player().get_sus() >= self.get_player().get_max_sus():

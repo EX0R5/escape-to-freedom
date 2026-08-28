@@ -1,7 +1,7 @@
 ﻿id,item_name,type,effect,value,room
 wooden_hoe,Wooden Hoe,Weapon,Damage,3,plantation
-food_ration,Food ration,Consumable,Heal,4,barn
-forged_papers,Forged Papers,Utility,Reducesuspicion,4,safe_house_a
+food_ration,Food ration,Heal,Heal,4,barn
+forged_papers,Forged Papers,Stealth,Reducesuspicion,4,safe_house_a
 whip,whip,Weapon,Damage,4,forest_path
-herb_bundle,Herb Bundle,Consumable,Heal,8,farm
+herb_bundle,Herb Bundle,Heal,Heal,8,farm
 knife,Knife,Weapon,Damage,6,safe_house_b
