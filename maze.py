@@ -101,8 +101,13 @@ class Room:
     def get_bosses(self) -> List[person.Boss]:
         return self._bosses
 
-    def set_bosses(self, value: List[person.Boss]) -> None:
-        self._bosses = value
+    def add_boss(self, value: person.Boss) -> None:
+        if value not in self.get_bosses():
+            self._bosses.append(value)
+
+    def remove_boss(self, value: person.Boss) -> None:
+        if value in self._bosses:
+            self._bosses.remove(value)
 
     def get_items(self) -> List[Items]:
         return self._items
