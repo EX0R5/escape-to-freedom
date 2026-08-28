@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 ﻿npc_id,name,type,room
 lantern_keeper,Lantern Keeper,Helper,safe_house_a
 station_keeper,Station Keeper,Helper,safe_house_b
 suspicious_farmer,Suspicious Farmer,Neutral,farm
+=======
+﻿npc_id,name,type,room
+lantern_keeper,Lantern Keeper,Helper,safe_house_a
+station_keeper,Station Keeper,Helper,safe_house_b
+suspicious_farmer,Suspicious Farmer,Neutral,farm
+>>>>>>> 57c92d01832533a9cd9d6c4cbd6d8ef8b7a1cca9
