@@ -1,4 +1,4 @@
 enemy_id,name,type,room,max_hp,attack
-patrol_guard,Patrol Guard,Enemy,forest_path,6,3
-river_patrol,River Patrol,Enemy,river_crossing,8,4
-bounty_hunter,Bounty Hunter Captain,Boss,final_port,25,5
+patrol_guard,Patrol Guard,Boss,forest_path,6,3
+river_patrol,River Patrol,Boss,river_crossing,8,4
+bounty_hunter,Bounty Hunter Captain,Monster,final_port,25,5

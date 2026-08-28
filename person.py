@@ -81,8 +81,8 @@ class Combatter(Person):
     def get_hp(self) -> int:
         return self._hp
 
-    def set_hp(self, hp: int) -> None:
-        self._hp = hp
+    def inc_hp(self, hp: int) -> None:
+        self._hp += hp
 
     def get_max_hp(self) -> int:
         return self._max_hp
@@ -120,8 +120,8 @@ class Player(Combatter):
     def get_sus(self) -> int:
         return self._sus
 
-    def set_sus(self, sus: int) -> None:
-        self._sus = sus
+    def inc_sus(self, sus: int) -> None:
+        self._sus += sus
 
     def get_max_sus(self) -> int:
         return self._max_sus
