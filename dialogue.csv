@@ -1,0 +1,7 @@
+﻿npc_id,text
+lantern_keeper,"You shouldn't be out at night. The patrols have been restless. Stay off the main roads, keep to the trees, and follow the river north. There are others who can help you further along. You are not alone."
+station_keeper,"You made it this far. That tells me something about you. The river crossing ahead is the most dangerous part. Cross at night, move fast, and do not stop. There is a knife here — take it."
+suspicious_farmer,"What are you doing on my land? I don't want any trouble here. I haven't seen anything, I don't know anything. Move on before someone who cares comes looking."
+patrol_guard,Hey! Stop right there.
+river_patrol,I knew someone was moving through here.
+bounty_hunter,I've been tracking you since the plantation.
