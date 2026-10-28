@@ -91,6 +91,12 @@ class Combatter(Person):
     def inc_hp(self, hp: int) -> None:
         self._hp += hp
 
+    def take_damage(self, damage: int) -> None:
+        self.inc_hp(-1 * damage)
+
+    def is_defeated(self) -> bool:
+        return self.get_hp() <= 0
+
     def get_max_hp(self) -> int:
         return self._max_hp
 
