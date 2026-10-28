@@ -103,7 +103,7 @@ class Game:
         if self.get_player().get_sus() >= self.get_player().get_max_sus():
             display.smart_print(self.get_text("caught"))
             return True
-        elif self.get_player().get_hp() <= 0:
+        elif self.get_player().is_defeated():
             display.smart_print(self.get_text("died"))
             return True
         elif (self.get_player().get_current_room().get_id() ==
@@ -193,7 +193,7 @@ class Game:
                     boss_wanted = boss
                     break
             boss_wanted.take_damage(self.get_player().get_damage())
-            if boss_wanted.get_hp() <= 0:
+            if boss_wanted.is_defeated():
                 display.smart_print(f"You defeated {boss_wanted.get_name()}!")
                 self.get_player().get_current_room().remove_boss(boss_wanted)
             display.print_attack(self.get_player().get_weapon(),
