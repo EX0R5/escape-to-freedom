@@ -1,3 +1,5 @@
+from typing import List
+
 class Dialogue:
     """
     Defines a dialogue object.
@@ -8,7 +10,7 @@ class Dialogue:
     added_sus (int): suspicion level increment if the dialogue runs
     options (List[Dialogue]): the next dialogue options
     """
-    def __init__(self, display_text: str, gift_item: Item, added_sus: int, options: List[Dialogue]) -> None:
+    def __init__(self, display_text: str, gift_item: "Item", added_sus: int, options: "List[Dialogue]") -> None:
         self._display_text = display_text
         self._gift_item = gift_item
         self._added_sus = added_sus
@@ -17,11 +19,11 @@ class Dialogue:
     def get_display_text(self) -> str:
         return self._display_text
 
-    def get_gift_item(self) -> Item:
+    def get_gift_item(self) -> "Item":
         return self._gift_item
 
     def get_added_sus(self) -> int:
         return self._added_sus
 
-    def get_options(self) -> List[Dialogue]:
+    def get_options(self) -> "List[Dialogue]":
         return self._options

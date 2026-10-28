@@ -3,6 +3,7 @@ import file
 import display
 import maze
 import item
+from typing import List, Tuple
 
 FIRST_ROOM = "plantation"
 MONSTER_ROOM = "final_port"
@@ -81,7 +82,7 @@ class Game:
         else:
             return False
 
-    def get_options(self) -> Tuple(List[str], bool, bool):
+    def get_options(self) -> Tuple[List[str], bool, bool]:
         """Returns: list of options, whether combat is active, whether monster is present"""
         current_room = self.get_player().get_current_room()
         options = []

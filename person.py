@@ -1,6 +1,7 @@
 import maze
 import item
 import dialogue
+from typing import Dict, List
 
 INVENTORY_SIZE = 5
 
