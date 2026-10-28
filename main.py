@@ -13,9 +13,11 @@ if __name__ == "__main__":
     mud.welcome()
     skip_intro = False
     while not mud.is_gameover():
-        choices, combat_active, monster_present = mud.get_options()  # retrieve options as List[str]
-        mud.display_options(choices, combat_active, monster_present, skip_intro)  # display
+        # retrieve options as List[str]
+        choices, combat_active, monster_present = mud.get_options()
+        mud.display_options(choices, combat_active,
+                            monster_present, skip_intro)  # display
         decision = mud.choose_option(len(choices))  # get them to choose
-        mud.execute_option(decision, choices)  # execute given the str version of choice
+        # execute given the str version of choice
+        mud.execute_option(decision, choices)
     mud.epilogue()
-    

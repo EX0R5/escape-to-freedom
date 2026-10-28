@@ -1,8 +1,10 @@
 import maze
 import item
 import dialogue
+from typing import Dict, List
 
 INVENTORY_SIZE = 5
+
 
 class Person:
     """
@@ -13,7 +15,8 @@ class Person:
     _current_room (Room): the room the person is in
     _inventory (List[item]): items that the person has
     _inventory_size (int): the maximum number of items the person can carry
-    _information (List[Dict[str, str]]): the pieces of information that the person has, can be true or false
+    _information (List[Dict[str, str]]): the pieces of information
+    that the person has, can be true or false
     """
     def __init__(self, name: str, current_room: maze.Room) -> None:
         self._name = name
@@ -46,6 +49,7 @@ class Person:
     def append_information(self, information: Dict[str, str]) -> None:
         self._information.append(information)
 
+
 class NPC(Person):
     """
     Defines an NPC.
@@ -53,7 +57,8 @@ class NPC(Person):
     Additional attributes:
     _start_dialogue (Dialogue): the starting dialogue to be displayed
     """
-    def __init__(self, name: str, current_room: maze.Room, start_dialogue: dialogue.Dialogue = None) -> None:
+    def __init__(self, name: str, current_room: maze.Room,
+                 start_dialogue: dialogue.Dialogue = None) -> None:
         super().__init__(name, current_room)
         self._start_dialogue = start_dialogue
 
@@ -62,6 +67,7 @@ class NPC(Person):
 
     def set_start_dialogue(self, start_dialogue: dialogue.Dialogue) -> None:
         self._start_dialogue = start_dialogue
+
 
 class Combatter(Person):
     """
@@ -72,7 +78,8 @@ class Combatter(Person):
     _max_hp (int): max_hp of combatter
     _damage (int): damage dealt by combatter per attack
     """
-    def __init__(self, name: str, current_room: maze.Room, hp: int, max_hp: int, damage: int) -> None:
+    def __init__(self, name: str, current_room: maze.Room, hp: int,
+                 max_hp: int, damage: int) -> None:
         super().__init__(name, current_room)
         self._hp = hp
         self._max_hp = max_hp
@@ -93,6 +100,7 @@ class Combatter(Person):
     def set_damage(self, damage: int) -> None:
         self._damage = damage
 
+
 class Player(Combatter):
     """
     Defines the Player.
@@ -102,7 +110,9 @@ class Player(Combatter):
     _sus (int): suspicion level of player
     _max_sus(int): maximum suspicion level of player
     """
-    def __init__(self, name: str, current_room: maze.Room, hp: int, max_hp: int, damage: int, weapon: item.Weapon, sus: int, max_sus: int) -> None:
+    def __init__(self, name: str, current_room: maze.Room, hp: int,
+                 max_hp: int, damage: int, weapon: item.Weapon,
+                 sus: int, max_sus: int) -> None:
         super().__init__(name, current_room, hp, max_hp, damage)
         self._weapon = weapon
         self._sus = sus
@@ -123,6 +133,7 @@ class Player(Combatter):
     def get_max_sus(self) -> int:
         return self._max_sus
 
+
 class Boss(Combatter):
     """
     Defines the Boss
@@ -133,7 +144,9 @@ class Boss(Combatter):
     _attack_text (str): Text displayed when the boss attacks the player
     _defeat_text (str): Text displayed when the player defeats the boss
     """
-    def __init__(self, name: str, current_room: maze.Room, hp: int, max_hp: int, damage: int, entry_text: str, escape_text: str, attack_text: str, defeat_text: str):
+    def __init__(self, name: str, current_room: maze.Room, hp: int,
+                 max_hp: int, damage: int, entry_text: str,
+                 escape_text: str, attack_text: str, defeat_text: str):
         super().__init__(name, current_room, hp, max_hp, damage)
         self._entry_text = entry_text
         self._escape_text = escape_text
@@ -152,9 +165,10 @@ class Boss(Combatter):
     def get_defeat_text(self) -> str:
         return self._defeat_text
 
+
 class Monster(Boss):
     """
     Defines a Monster (final Boss).
-    
+
     Additional attributes: None
     """

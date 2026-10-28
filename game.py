@@ -3,10 +3,12 @@ import file
 import display
 import maze
 import item
+from typing import List, Tuple
 
 FIRST_ROOM = "plantation"
 MONSTER_ROOM = "final_port"
 VICTORY_ROOM = "northern_sanctuary"
+
 
 class Game:
     """
@@ -31,7 +33,7 @@ class Game:
 
     def set_maze(self, maze: maze.Maze) -> None:
         self._maze = maze
-        
+
     def welcome(self):
         display.smart_print("Welcome to Escape to Freedom!")
         display.smart_print("Please enter your name:")
@@ -42,27 +44,47 @@ class Game:
         room_data = file.read_file("room_data.csv")
         rooms = {}
         for room in room_data:
-            rooms[room["ID"]] = maze.Room(room["ID"], room["Name"], room["Description"], 0, {"N": room["NORTH"], "S": room["SOUTH"], "E": room["EAST"], "W": room["WEST"]}, [], [])
+            rooms[room["ID"]] = maze.Room(
+                room["ID"], room["Name"], room["Description"], 0,
+                {"N": room["NORTH"], "S": room["SOUTH"],
+                 "E": room["EAST"], "W": room["WEST"]}, [], [])
         self.set_maze(maze.Maze(rooms, rooms[FIRST_ROOM], None))
         enemy_data = file.read_file("enemy_data.csv")
         for enemy in enemy_data:
             if enemy["type"] == "Monster":
-                self.get_maze().set_monster(person.Monster(enemy["name"], rooms[enemy["room"]], int(enemy["max_hp"]), int(enemy["max_hp"]), int(enemy["attack"]), "placeholder entry text", "placeholder escape text", "placeholder attack text", "placeholder defeat text"))
+                self.get_maze().set_monster(person.Monster(
+                    enemy["name"], rooms[enemy["room"]],
+                    int(enemy["max_hp"]), int(enemy["max_hp"]),
+                    int(enemy["attack"]), "placeholder entry text",
+                    "placeholder escape text", "placeholder attack text",
+                    "placeholder defeat text"))
                 rooms[enemy["room"]].add_boss(self.get_maze().get_monster())
             else:
-                rooms[enemy["room"]].add_boss(person.Boss(enemy["name"], rooms[enemy["room"]], int(enemy["max_hp"]), int(enemy["max_hp"]), int(enemy["attack"]), "placeholder entry text", "placeholder escape text", "placeholder attack text", "placeholder defeat text"))
+                rooms[enemy["room"]].add_boss(person.Boss(
+                    enemy["name"], rooms[enemy["room"]],
+                    int(enemy["max_hp"]), int(enemy["max_hp"]),
+                    int(enemy["attack"]), "placeholder entry text",
+                    "placeholder escape text", "placeholder attack text",
+                    "placeholder defeat text"))
         player_data = file.read_file("player_data.csv")
-        player = person.Player(player_data["Name"], self.get_maze().get_start_room(), int(player_data["HP"]), int(player_data["MaxHP"]), int(player_data["Damage"]), player_data["Weapon"], player_data["Sus"], player_data["MaxSus"])
+        player = person.Player(
+            player_data["Name"], self.get_maze().get_start_room(),
+            int(player_data["HP"]), int(player_data["MaxHP"]),
+            int(player_data["Damage"]), player_data["Weapon"],
+            player_data["Sus"], player_data["MaxSus"])
         self.set_player(player)
         item_data = file.read_file("items.csv")
         for item_entry in item_data:
-            #id,item_name,type,effect,value,room
+            # id,item_name,type,effect,value,room
             if item_entry["type"] == "Weapon":
-                rooms[item_entry["room"]] = item.Weapon(item_entry["item_name"], None, item_entry["value"])
+                rooms[item_entry["room"]] = item.Weapon(
+                    item_entry["item_name"], None, item_entry["value"])
             elif item_entry["type"] == "Heal":
-                rooms[item_entry["room"]] = item.HealthItem(item_entry["item_name"], None, item_entry["value"])
+                rooms[item_entry["room"]] = item.HealthItem(
+                    item_entry["item_name"], None, item_entry["value"])
             elif item_entry["type"] == "Stealth":
-                rooms[item_entry["room"]] = item.StealthItem(item_entry["item_name"], None)
+                rooms[item_entry["room"]] = item.StealthItem(
+                    item_entry["item_name"], None)
 
     def is_gameover(self):
         if self.get_player().get_sus() >= self.get_player().get_max_sus():
@@ -73,16 +95,19 @@ class Game:
             return True
         elif self.get_player().get_current_room().get_id() == VICTORY_ROOM:
             display.screenbreak("=")
-            display.smart_print(self.get_player().get_current_room().get_name())
+            display.smart_print(
+                self.get_player().get_current_room().get_name())
             display.screenbreak("=")
-            display.smart_print(self.get_player().get_current_room().get_description(), 2)
+            display.smart_print(
+                self.get_player().get_current_room().get_description(), 2)
             display.smart_print("You have escaped! Congratulations!")
             return True
         else:
             return False
 
-    def get_options(self) -> Tuple(List[str], bool, bool):
-        """Returns: list of options, whether combat is active, whether monster is present"""
+    def get_options(self) -> Tuple[List[str], bool, bool]:
+        """Returns: list of options, whether combat is active,
+        whether monster is present"""
         current_room = self.get_player().get_current_room()
         options = []
         counter = 1
@@ -93,7 +118,7 @@ class Game:
             for boss in current_room.get_bosses():
                 options.append(f"{counter}. Attack {boss.get_name()}")
                 counter += 1
-                if type(boss) == person.Monster:
+                if type(boss) is person.Monster:
                     monster_present = True
         for item in self.get_player().get_inventory():
             options.append(f"{counter}. Use {item.get_name()}")
@@ -101,11 +126,13 @@ class Game:
         if not monster_present:
             exits = self.get_player().get_current_room().get_exits()
             for exit in exits:
-                options.append(f"{counter}. Flee to {exits[exit].get_name()} [{exit}]")
+                options.append(
+                    f"{counter}. Flee to {exits[exit].get_name()} [{exit}]")
                 counter += 1
         return (options, combat_active, monster_present)
 
-    def display_options(self, options: List[str], combat_active: bool, monster_present: bool, skip_intro: bool) -> None:
+    def display_options(self, options: List[str], combat_active: bool,
+                        monster_present: bool, skip_intro: bool) -> None:
         """
         Displays the options to the player.
 
@@ -129,13 +156,16 @@ class Game:
                 display.print_new_line()
                 for boss in current_room.get_bosses():
                     display.smart_print(f"{boss.get_name()}: {boss.get_hp()}")
-                display.smart_print(f"{self.get_player().get_name()}: {self.get_player().get_hp()}")
+                display.smart_print(
+                    f"{self.get_player().get_name()}: "
+                    f"{self.get_player().get_hp()}")
             if not monster_present:
                 display.smart_print("Exits:")
                 exits = current_room.get_exits()
                 for exit_key in exits:
                     exit_room = exits[exit_key]
-                    display.smart_print(f"[{exit_key}] {exit_room.get_name()}", 2)
+                    display.smart_print(
+                        f"[{exit_key}] {exit_room.get_name()}", 2)
         display.print_new_line()
         display.smart_print("What will you choose?")
         for option in options:
@@ -143,7 +173,7 @@ class Game:
 
     def choose_option(self, max_no: int) -> int:
         x = display.smart_input(int)
-        if not(x > 0 and x <= max_no):
+        if not (x > 0 and x <= max_no):
             self.choose_option(max_no)
         return x
 
@@ -166,14 +196,20 @@ class Game:
                 display.smart_print(f"You defeated {boss_wanted.get_name()}!")
                 self.get_player().get_current_room().remove_boss(boss_wanted)
             display.screenbreak("-")
-            display.smart_print(f"You use the {self.get_player().get_weapon()} for {self.get_player().get_damage()} damage.")
+            display.smart_print(
+                f"You use the {self.get_player().get_weapon()} for "
+                f"{self.get_player().get_damage()} damage.")
             for boss in self.get_player().get_current_room().get_bosses():
-                display.smart_print(f"{boss_wanted.get_name()} attacks you for {boss_wanted.get_damage()} damage.")
+                display.smart_print(
+                    f"{boss_wanted.get_name()} attacks you for "
+                    f"{boss_wanted.get_damage()} damage.")
                 self.get_player().inc_hp(-1 * self.get_player().get_damage())
             display.print_new_line()
             for boss in self.get_player().get_current_room().get_bosses():
                 display.smart_print(f"{boss.get_name()}: {boss.get_hp()}")
-            display.smart_print(f"{self.get_player().get_name()}: {self.get_player().get_hp()}")
+            display.smart_print(
+                f"{self.get_player().get_name()}: "
+                f"{self.get_player().get_hp()}")
             return True
         print("not implemented sorry")
 

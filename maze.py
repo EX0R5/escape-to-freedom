@@ -1,7 +1,10 @@
 import person
+from typing import Dict, List
+
 
 class Maze:
-    def __init__(self, rooms: Dict[str, Room], start_room: Room, monster: person.Monster):
+    def __init__(self, rooms: "Dict[str, Room]", start_room: "Room",
+                 monster: "person.Monster"):
         """
         Defines a Maze.
 
@@ -19,23 +22,24 @@ class Maze:
         self._start_room = start_room
         self._monster = monster
 
-    def get_rooms(self) -> Dict[str, Room]:
+    def get_rooms(self) -> "Dict[str, Room]":
         return self._rooms
 
-    def set_rooms(self, value: Dict[str, Room]) -> None:
+    def set_rooms(self, value: "Dict[str, Room]") -> None:
         self._rooms = value
 
-    def get_start_room(self) -> Room:
+    def get_start_room(self) -> "Room":
         return self._start_room
 
-    def set_start_room(self, value: Room) -> None:
+    def set_start_room(self, value: "Room") -> None:
         self._start_room = value
 
-    def get_monster(self) -> person.Monster:
+    def get_monster(self) -> "person.Monster":
         return self._monster
 
-    def set_monster(self, value: person.Monster) -> None:
+    def set_monster(self, value: "person.Monster") -> None:
         self._monster = value
+
 
 class Room:
     """
@@ -49,8 +53,9 @@ class Room:
     bosses (List[Boss]): bosses found in room
     items (List[Items]): items found in room
     """
-    def __init__(self, id: str, name: str, description: str, sus_on_path: int, exits: Dict[str, Room],
-               bosses: List[person.Boss], items: List[Items]) -> None:
+    def __init__(self, id: str, name: str, description: str, sus_on_path: int,
+                 exits: "Dict[str, Room]", bosses: "List[person.Boss]",
+                 items: "List[item.Item]") -> None:
         self._id = id
         self._name = name
         self._description = description
@@ -86,11 +91,11 @@ class Room:
     def set_sus_on_path(self, value: int) -> None:
         self._sus_on_path = value
 
-    def get_exits(self) -> Dict[str, Room]:
+    def get_exits(self) -> "Dict[str, Room]":
         return self._exits
 
-    def set_exits(self, value: Dict[str, Room]) -> None:
-        if value[1] == None:
+    def set_exits(self, value: "Dict[str, Room]") -> None:
+        if value[1] is None:
             try:
                 del self._exits[value[0]]
             except KeyError:
@@ -98,19 +103,19 @@ class Room:
         else:
             self._exits[value[0]] = value[1]
 
-    def get_bosses(self) -> List[person.Boss]:
+    def get_bosses(self) -> "List[person.Boss]":
         return self._bosses
 
-    def add_boss(self, value: person.Boss) -> None:
+    def add_boss(self, value: "person.Boss") -> None:
         if value not in self.get_bosses():
             self._bosses.append(value)
 
-    def remove_boss(self, value: person.Boss) -> None:
+    def remove_boss(self, value: "person.Boss") -> None:
         if value in self._bosses:
             self._bosses.remove(value)
 
-    def get_items(self) -> List[Items]:
+    def get_items(self) -> "List[item.Item]":
         return self._items
 
-    def set_items(self, value: List[Items]) -> None:
+    def set_items(self, value: "List[item.Item]") -> None:
         self._items = value

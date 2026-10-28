@@ -2,7 +2,8 @@ import math
 
 SCREEN_WIDTH = 100
 
-def smart_print(s: str, indent: int=0) -> None:
+
+def smart_print(s: str, indent: int = 0) -> None:
     """
     Prints, but wraps text if it overflows the screen width.
 
@@ -21,6 +22,7 @@ def smart_print(s: str, indent: int=0) -> None:
             smart_print(s[i + 1:], indent)
             return
 
+
 def screenbreak(c: str) -> None:
     """
     Prints a screenbreak.
@@ -29,6 +31,7 @@ def screenbreak(c: str) -> None:
     c (char): character to be used for screenbreak
     """
     print(SCREEN_WIDTH * c)
+
 
 def smart_input(type_wanted: type) -> type:
     """
@@ -50,6 +53,7 @@ def smart_input(type_wanted: type) -> type:
                 continue
             return int(x)
         print("Not implemented yet")
+
 
 def print_new_line() -> None:
     """
