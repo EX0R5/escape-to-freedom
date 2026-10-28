@@ -1,5 +1,6 @@
 from typing import List
 
+
 class Dialogue:
     """
     Defines a dialogue object.

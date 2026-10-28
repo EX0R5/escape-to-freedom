@@ -1,4 +1,6 @@
 import csv
+
+
 def read_file(file: str) -> list:
     """
     Reads the contents of a CSV file.

@@ -5,6 +5,7 @@ from typing import Dict, List
 
 INVENTORY_SIZE = 5
 
+
 class Person:
     """
     Defines a person.
@@ -47,6 +48,7 @@ class Person:
     def append_information(self, information: Dict[str, str]) -> None:
         self._information.append(information)
 
+
 class NPC(Person):
     """
     Defines an NPC.
@@ -63,6 +65,7 @@ class NPC(Person):
 
     def set_start_dialogue(self, start_dialogue: dialogue.Dialogue) -> None:
         self._start_dialogue = start_dialogue
+
 
 class Combatter(Person):
     """
@@ -94,6 +97,7 @@ class Combatter(Person):
     def set_damage(self, damage: int) -> None:
         self._damage = damage
 
+
 class Player(Combatter):
     """
     Defines the Player.
@@ -124,6 +128,7 @@ class Player(Combatter):
     def get_max_sus(self) -> int:
         return self._max_sus
 
+
 class Boss(Combatter):
     """
     Defines the Boss
@@ -152,6 +157,7 @@ class Boss(Combatter):
 
     def get_defeat_text(self) -> str:
         return self._defeat_text
+
 
 class Monster(Boss):
     """

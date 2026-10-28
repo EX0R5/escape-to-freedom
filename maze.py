@@ -1,6 +1,7 @@
 import person
 from typing import Dict, List
 
+
 class Maze:
     def __init__(self, rooms: "Dict[str, Room]", start_room: "Room", monster: "person.Monster"):
         """
@@ -37,6 +38,7 @@ class Maze:
 
     def set_monster(self, value: "person.Monster") -> None:
         self._monster = value
+
 
 class Room:
     """

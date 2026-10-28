@@ -9,6 +9,7 @@ FIRST_ROOM = "plantation"
 MONSTER_ROOM = "final_port"
 VICTORY_ROOM = "northern_sanctuary"
 
+
 class Game:
     """
     Initiates game functions and attributes.

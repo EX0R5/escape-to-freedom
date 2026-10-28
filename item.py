@@ -16,6 +16,7 @@ class Item:
     def get_description(self) -> str:
         return self._description
 
+
 class Map(Item):
     """
     Defines a map.
@@ -29,6 +30,7 @@ class Map(Item):
 
     def get_vicinity(self) -> int:
         return self._vicinity
+
 
 class Weapon(Item):
     """
@@ -44,6 +46,7 @@ class Weapon(Item):
     def get_damage(self) -> int:
         return self._damage
 
+
 class HealthItem(Item):
     """
     Defines an item that heals you.
@@ -58,7 +61,7 @@ class HealthItem(Item):
     def get_heal(self) -> int:
         return self._heal
 
+
 class StealthItem(Item):
     def __init__(self, name: str, description: str):
         super().__init__(name, description)
-
