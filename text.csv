@@ -9,3 +9,7 @@ choose_prompt,What will you choose?
 not_implemented,not implemented sorry
 epilogue_1,Thank you for playing Escape to Freedom!
 epilogue_2,We hope you enjoyed the game.
+entry_text,placeholder entry text
+escape_text,placeholder escape text
+attack_text,placeholder attack text
+defeat_text,placeholder defeat text

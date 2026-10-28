@@ -13,8 +13,6 @@ def read_file(file: str) -> list:
         reader = csv.DictReader(f)
         for row in reader:
             data.append(row)
-    if len(data) == 1:
-        return data[0]
     return data
 
 
