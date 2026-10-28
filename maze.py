@@ -18,7 +18,7 @@ class Maze:
             room = rooms[room_key]
             exits = room.get_exits()
             for exit_key in exits:
-                exits[exit_key] = rooms[exits[exit_key]]
+                room.set_exits((exit_key, rooms[exits[exit_key]]))
         self._start_room = start_room
         self._monster = monster
 
