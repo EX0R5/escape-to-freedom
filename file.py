@@ -16,3 +16,21 @@ def read_file(file: str) -> list:
     if len(data) == 1:
         return data[0]
     return data
+
+
+def read_pairs(file: str, first: str, second: str) -> dict:
+    """
+    Reads a CSV into a dictionary mapping one column to another.
+
+    Attributes:
+    file (str): the CSV file to read
+    first (str): name of the column used as the key
+    second (str): name of the column used as the value
+
+    Returns:
+    dict: the second column indexed by the first
+    """
+    pairs = {}
+    for row in read_file(file):
+        pairs[row[first]] = row[second]
+    return pairs

@@ -5,10 +5,6 @@ import maze
 import item
 from typing import List, Tuple
 
-FIRST_ROOM = "plantation"
-MONSTER_ROOM = "final_port"
-VICTORY_ROOM = "northern_sanctuary"
-
 
 class Game:
     """
@@ -21,6 +17,8 @@ class Game:
     def __init__(self) -> None:
         self._player = None
         self._maze = None
+        self._texts = {}
+        self._config = {}
 
     def get_player(self) -> person.Player:
         return self._player
@@ -34,13 +32,27 @@ class Game:
     def set_maze(self, maze: maze.Maze) -> None:
         self._maze = maze
 
+    def set_texts(self, texts: dict) -> None:
+        self._texts = texts
+
+    def get_text(self, label: str) -> str:
+        return self._texts[label]
+
+    def set_config(self, config: dict) -> None:
+        self._config = config
+
+    def get_config(self, key: str) -> str:
+        return self._config[key]
+
     def welcome(self):
-        display.smart_print("Welcome to Escape to Freedom!")
-        display.smart_print("Please enter your name:")
+        display.smart_print(self.get_text("welcome"))
+        display.smart_print(self.get_text("name_prompt"))
         name = display.smart_input(str)
         self.get_player().set_name(name)
 
     def setup(self):
+        self.set_texts(file.read_pairs("text.csv", "label", "text"))
+        self.set_config(file.read_pairs("game.csv", "key", "value"))
         room_data = file.read_file("room_data.csv")
         rooms = {}
         for room in room_data:
@@ -48,7 +60,8 @@ class Game:
                 room["ID"], room["Name"], room["Description"], 0,
                 {"N": room["NORTH"], "S": room["SOUTH"],
                  "E": room["EAST"], "W": room["WEST"]}, [], [])
-        self.set_maze(maze.Maze(rooms, rooms[FIRST_ROOM], None))
+        self.set_maze(
+            maze.Maze(rooms, rooms[self.get_config("first_room")], None))
         enemy_data = file.read_file("enemy_data.csv")
         for enemy in enemy_data:
             if enemy["type"] == "Monster":
@@ -88,19 +101,18 @@ class Game:
 
     def is_gameover(self):
         if self.get_player().get_sus() >= self.get_player().get_max_sus():
-            display.smart_print("You have been caught! Game over.")
+            display.smart_print(self.get_text("caught"))
             return True
         elif self.get_player().get_hp() <= 0:
-            display.smart_print("You have died! Game over.")
+            display.smart_print(self.get_text("died"))
             return True
-        elif self.get_player().get_current_room().get_id() == VICTORY_ROOM:
-            display.screenbreak("=")
-            display.smart_print(
+        elif (self.get_player().get_current_room().get_id() ==
+                self.get_config("victory_room")):
+            display.print_room_title(
                 self.get_player().get_current_room().get_name())
-            display.screenbreak("=")
             display.smart_print(
                 self.get_player().get_current_room().get_description(), 2)
-            display.smart_print("You have escaped! Congratulations!")
+            display.smart_print(self.get_text("escaped"))
             return True
         else:
             return False
@@ -144,32 +156,21 @@ class Game:
         """
         if not skip_intro:
             current_room = self.get_player().get_current_room()
-            display.screenbreak("=")
-            display.smart_print(current_room.get_name())
-            display.screenbreak("=")
+            display.print_room_title(current_room.get_name())
             # check for npcs and bosses
             display.smart_print(current_room.get_description(), 2)
             display.print_new_line()
             if combat_active:
-                for boss in current_room.get_bosses():
-                    display.smart_print(boss.get_entry_text(), 2)
-                display.print_new_line()
-                for boss in current_room.get_bosses():
-                    display.smart_print(f"{boss.get_name()}: {boss.get_hp()}")
-                display.smart_print(
-                    f"{self.get_player().get_name()}: "
-                    f"{self.get_player().get_hp()}")
+                display.print_boss_entries(current_room.get_bosses())
+                display.print_combat_status(
+                    current_room.get_bosses(),
+                    self.get_player().get_name(),
+                    self.get_player().get_hp())
             if not monster_present:
-                display.smart_print("Exits:")
-                exits = current_room.get_exits()
-                for exit_key in exits:
-                    exit_room = exits[exit_key]
-                    display.smart_print(
-                        f"[{exit_key}] {exit_room.get_name()}", 2)
-        display.print_new_line()
-        display.smart_print("What will you choose?")
-        for option in options:
-            display.smart_print(option, 2)
+                display.print_exits(
+                    self.get_text("exits_header"),
+                    current_room.get_exits())
+        display.print_menu(self.get_text("choose_prompt"), options)
 
     def choose_option(self, max_no: int) -> int:
         x = display.smart_input(int)
@@ -195,25 +196,21 @@ class Game:
             if boss_wanted.get_hp() <= 0:
                 display.smart_print(f"You defeated {boss_wanted.get_name()}!")
                 self.get_player().get_current_room().remove_boss(boss_wanted)
-            display.screenbreak("-")
-            display.smart_print(
-                f"You use the {self.get_player().get_weapon()} for "
-                f"{self.get_player().get_damage()} damage.")
+            display.print_attack(self.get_player().get_weapon(),
+                                 self.get_player().get_damage())
             for boss in self.get_player().get_current_room().get_bosses():
-                display.smart_print(
-                    f"{boss_wanted.get_name()} attacks you for "
-                    f"{boss_wanted.get_damage()} damage.")
+                display.print_boss_attack(boss_wanted.get_name(),
+                                          boss_wanted.get_damage())
                 self.get_player().inc_hp(-1 * self.get_player().get_damage())
             display.print_new_line()
-            for boss in self.get_player().get_current_room().get_bosses():
-                display.smart_print(f"{boss.get_name()}: {boss.get_hp()}")
-            display.smart_print(
-                f"{self.get_player().get_name()}: "
-                f"{self.get_player().get_hp()}")
+            display.print_combat_status(
+                self.get_player().get_current_room().get_bosses(),
+                self.get_player().get_name(),
+                self.get_player().get_hp())
             return True
-        print("not implemented sorry")
+        print(self.get_text("not_implemented"))
 
     def epilogue(self):
         display.screenbreak("=")
-        display.smart_print("Thank you for playing Escape to Freedom!")
-        display.smart_print("We hope you enjoyed the game.")
+        display.smart_print(self.get_text("epilogue_1"))
+        display.smart_print(self.get_text("epilogue_2"))

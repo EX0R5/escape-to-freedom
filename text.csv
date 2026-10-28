@@ -1,0 +1,11 @@
+label,text
+welcome,Welcome to Escape to Freedom!
+name_prompt,Please enter your name:
+caught,You have been caught! Game over.
+died,You have died! Game over.
+escaped,You have escaped! Congratulations!
+exits_header,Exits:
+choose_prompt,What will you choose?
+not_implemented,not implemented sorry
+epilogue_1,Thank you for playing Escape to Freedom!
+epilogue_2,We hope you enjoyed the game.
