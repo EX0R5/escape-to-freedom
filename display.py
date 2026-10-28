@@ -2,7 +2,7 @@ import math
 
 SCREEN_WIDTH = 100
 
-def smart_print(s: str, indent: int=0) -> None:
+def smart_print(s: str, indent: int = 0) -> None:
     """
     Prints, but wraps text if it overflows the screen width.
 

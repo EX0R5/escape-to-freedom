@@ -18,4 +18,4 @@ if __name__ == "__main__":
         decision = mud.choose_option(len(choices))  # get them to choose
         mud.execute_option(decision, choices)  # execute given the str version of choice
     mud.epilogue()
-    
+

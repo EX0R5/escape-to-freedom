@@ -14,7 +14,7 @@ class Item:
         return self._name
 
     def get_description(self) -> str:
-        return self._description    
+        return self._description
 
 class Map(Item):
     """
@@ -43,7 +43,7 @@ class Weapon(Item):
 
     def get_damage(self) -> int:
         return self._damage
-    
+
 class HealthItem(Item):
     """
     Defines an item that heals you.

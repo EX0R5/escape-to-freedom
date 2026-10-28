@@ -156,6 +156,6 @@ class Boss(Combatter):
 class Monster(Boss):
     """
     Defines a Monster (final Boss).
-    
+
     Additional attributes: None
     """

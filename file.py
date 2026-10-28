@@ -1,5 +1,5 @@
 import csv
-def read_file(file: str) ->list:
+def read_file(file: str) -> list:
     """
     Reads the contents of a CSV file.
 
@@ -7,7 +7,7 @@ def read_file(file: str) ->list:
         list: The data contained in the file.
     """
     data = []
-    with open (file, "r") as f:
+    with open(file, "r") as f:
         reader = csv.DictReader(f)
         for row in reader:
             data.append(row)

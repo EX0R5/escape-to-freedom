@@ -32,7 +32,7 @@ class Game:
 
     def set_maze(self, maze: maze.Maze) -> None:
         self._maze = maze
-        
+
     def welcome(self):
         display.smart_print("Welcome to Escape to Freedom!")
         display.smart_print("Please enter your name:")
@@ -57,7 +57,7 @@ class Game:
         self.set_player(player)
         item_data = file.read_file("items.csv")
         for item_entry in item_data:
-            #id,item_name,type,effect,value,room
+            # id,item_name,type,effect,value,room
             if item_entry["type"] == "Weapon":
                 rooms[item_entry["room"]] = item.Weapon(item_entry["item_name"], None, item_entry["value"])
             elif item_entry["type"] == "Heal":
@@ -94,7 +94,7 @@ class Game:
             for boss in current_room.get_bosses():
                 options.append(f"{counter}. Attack {boss.get_name()}")
                 counter += 1
-                if type(boss) == person.Monster:
+                if type(boss) is person.Monster:
                     monster_present = True
         for item in self.get_player().get_inventory():
             options.append(f"{counter}. Use {item.get_name()}")
@@ -144,7 +144,7 @@ class Game:
 
     def choose_option(self, max_no: int) -> int:
         x = display.smart_input(int)
-        if not(x > 0 and x <= max_no):
+        if not (x > 0 and x <= max_no):
             self.choose_option(max_no)
         return x
 

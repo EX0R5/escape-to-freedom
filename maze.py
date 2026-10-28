@@ -91,7 +91,7 @@ class Room:
         return self._exits
 
     def set_exits(self, value: "Dict[str, Room]") -> None:
-        if value[1] == None:
+        if value[1] is None:
             try:
                 del self._exits[value[0]]
             except KeyError:

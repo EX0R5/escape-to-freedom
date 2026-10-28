@@ -3,7 +3,7 @@ from typing import List
 class Dialogue:
     """
     Defines a dialogue object.
-  
+
     Attributes:
     display_text (str): text to be displayed
     gift_item (Item): any items that will be given when the dialogue runs
