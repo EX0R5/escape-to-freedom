@@ -5,10 +5,6 @@ import maze
 import item
 from typing import List, Tuple
 
-FIRST_ROOM = "plantation"
-MONSTER_ROOM = "final_port"
-VICTORY_ROOM = "northern_sanctuary"
-
 
 class Game:
     """
@@ -22,6 +18,7 @@ class Game:
         self._player = None
         self._maze = None
         self._texts = {}
+        self._config = {}
 
     def get_player(self) -> person.Player:
         return self._player
@@ -41,6 +38,12 @@ class Game:
     def get_text(self, label: str) -> str:
         return self._texts[label]
 
+    def set_config(self, config: dict) -> None:
+        self._config = config
+
+    def get_config(self, key: str) -> str:
+        return self._config[key]
+
     def welcome(self):
         display.smart_print(self.get_text("welcome"))
         display.smart_print(self.get_text("name_prompt"))
@@ -49,6 +52,7 @@ class Game:
 
     def setup(self):
         self.set_texts(file.read_pairs("text.csv", "label", "text"))
+        self.set_config(file.read_pairs("game.csv", "key", "value"))
         room_data = file.read_file("room_data.csv")
         rooms = {}
         for room in room_data:
@@ -56,7 +60,8 @@ class Game:
                 room["ID"], room["Name"], room["Description"], 0,
                 {"N": room["NORTH"], "S": room["SOUTH"],
                  "E": room["EAST"], "W": room["WEST"]}, [], [])
-        self.set_maze(maze.Maze(rooms, rooms[FIRST_ROOM], None))
+        self.set_maze(
+            maze.Maze(rooms, rooms[self.get_config("first_room")], None))
         enemy_data = file.read_file("enemy_data.csv")
         for enemy in enemy_data:
             if enemy["type"] == "Monster":
@@ -101,7 +106,8 @@ class Game:
         elif self.get_player().get_hp() <= 0:
             display.smart_print(self.get_text("died"))
             return True
-        elif self.get_player().get_current_room().get_id() == VICTORY_ROOM:
+        elif (self.get_player().get_current_room().get_id() ==
+                self.get_config("victory_room")):
             display.screenbreak("=")
             display.smart_print(
                 self.get_player().get_current_room().get_name())
