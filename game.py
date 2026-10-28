@@ -108,10 +108,8 @@ class Game:
             return True
         elif (self.get_player().get_current_room().get_id() ==
                 self.get_config("victory_room")):
-            display.screenbreak("=")
-            display.smart_print(
+            display.print_room_title(
                 self.get_player().get_current_room().get_name())
-            display.screenbreak("=")
             display.smart_print(
                 self.get_player().get_current_room().get_description(), 2)
             display.smart_print(self.get_text("escaped"))
@@ -158,32 +156,21 @@ class Game:
         """
         if not skip_intro:
             current_room = self.get_player().get_current_room()
-            display.screenbreak("=")
-            display.smart_print(current_room.get_name())
-            display.screenbreak("=")
+            display.print_room_title(current_room.get_name())
             # check for npcs and bosses
             display.smart_print(current_room.get_description(), 2)
             display.print_new_line()
             if combat_active:
-                for boss in current_room.get_bosses():
-                    display.smart_print(boss.get_entry_text(), 2)
-                display.print_new_line()
-                for boss in current_room.get_bosses():
-                    display.smart_print(f"{boss.get_name()}: {boss.get_hp()}")
-                display.smart_print(
-                    f"{self.get_player().get_name()}: "
-                    f"{self.get_player().get_hp()}")
+                display.print_boss_entries(current_room.get_bosses())
+                display.print_combat_status(
+                    current_room.get_bosses(),
+                    self.get_player().get_name(),
+                    self.get_player().get_hp())
             if not monster_present:
-                display.smart_print(self.get_text("exits_header"))
-                exits = current_room.get_exits()
-                for exit_key in exits:
-                    exit_room = exits[exit_key]
-                    display.smart_print(
-                        f"[{exit_key}] {exit_room.get_name()}", 2)
-        display.print_new_line()
-        display.smart_print(self.get_text("choose_prompt"))
-        for option in options:
-            display.smart_print(option, 2)
+                display.print_exits(
+                    self.get_text("exits_header"),
+                    current_room.get_exits())
+        display.print_menu(self.get_text("choose_prompt"), options)
 
     def choose_option(self, max_no: int) -> int:
         x = display.smart_input(int)
@@ -209,21 +196,17 @@ class Game:
             if boss_wanted.get_hp() <= 0:
                 display.smart_print(f"You defeated {boss_wanted.get_name()}!")
                 self.get_player().get_current_room().remove_boss(boss_wanted)
-            display.screenbreak("-")
-            display.smart_print(
-                f"You use the {self.get_player().get_weapon()} for "
-                f"{self.get_player().get_damage()} damage.")
+            display.print_attack(self.get_player().get_weapon(),
+                                 self.get_player().get_damage())
             for boss in self.get_player().get_current_room().get_bosses():
-                display.smart_print(
-                    f"{boss_wanted.get_name()} attacks you for "
-                    f"{boss_wanted.get_damage()} damage.")
+                display.print_boss_attack(boss_wanted.get_name(),
+                                          boss_wanted.get_damage())
                 self.get_player().inc_hp(-1 * self.get_player().get_damage())
             display.print_new_line()
-            for boss in self.get_player().get_current_room().get_bosses():
-                display.smart_print(f"{boss.get_name()}: {boss.get_hp()}")
-            display.smart_print(
-                f"{self.get_player().get_name()}: "
-                f"{self.get_player().get_hp()}")
+            display.print_combat_status(
+                self.get_player().get_current_room().get_bosses(),
+                self.get_player().get_name(),
+                self.get_player().get_hp())
             return True
         print(self.get_text("not_implemented"))
 
