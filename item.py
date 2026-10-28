@@ -22,7 +22,8 @@ class Map(Item):
     Defines a map.
 
     Additional attributes:
-    vicinity (int): the number of rooms away from current room that the map will reveal
+    vicinity (int): the number of rooms away from current room that
+    the map will reveal
     """
     def __init__(self, name: str, description: str, vicinity: int) -> None:
         super().__init__(name, description)

@@ -3,7 +3,8 @@ from typing import Dict, List
 
 
 class Maze:
-    def __init__(self, rooms: "Dict[str, Room]", start_room: "Room", monster: "person.Monster"):
+    def __init__(self, rooms: "Dict[str, Room]", start_room: "Room",
+                 monster: "person.Monster"):
         """
         Defines a Maze.
 
@@ -52,8 +53,9 @@ class Room:
     bosses (List[Boss]): bosses found in room
     items (List[Items]): items found in room
     """
-    def __init__(self, id: str, name: str, description: str, sus_on_path: int, exits: "Dict[str, Room]",
-               bosses: "List[person.Boss]", items: "List[item.Item]") -> None:
+    def __init__(self, id: str, name: str, description: str, sus_on_path: int,
+                 exits: "Dict[str, Room]", bosses: "List[person.Boss]",
+                 items: "List[item.Item]") -> None:
         self._id = id
         self._name = name
         self._description = description
