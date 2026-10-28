@@ -192,7 +192,7 @@ class Game:
                 if boss.get_name() == choices[decision][10:]:
                     boss_wanted = boss
                     break
-            boss_wanted.inc_hp(-1 * self.get_player().get_damage())
+            boss_wanted.take_damage(self.get_player().get_damage())
             if boss_wanted.get_hp() <= 0:
                 display.smart_print(f"You defeated {boss_wanted.get_name()}!")
                 self.get_player().get_current_room().remove_boss(boss_wanted)
@@ -201,7 +201,7 @@ class Game:
             for boss in self.get_player().get_current_room().get_bosses():
                 display.print_boss_attack(boss_wanted.get_name(),
                                           boss_wanted.get_damage())
-                self.get_player().inc_hp(-1 * self.get_player().get_damage())
+                self.get_player().take_damage(self.get_player().get_damage())
             display.print_new_line()
             display.print_combat_status(
                 self.get_player().get_current_room().get_bosses(),
