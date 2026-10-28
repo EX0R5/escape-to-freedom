@@ -164,15 +164,21 @@ class Game:
             display.print_new_line()
             if combat_active:
                 display.print_boss_entries(current_room.get_bosses())
-                display.print_combat_status(
-                    current_room.get_bosses(),
-                    self.get_player().get_name(),
-                    self.get_player().get_hp())
+                self.show_combat_status()
             if not monster_present:
                 display.print_exits(
                     self.get_text("exits_header"),
                     current_room.get_exits())
         display.print_menu(self.get_text("choose_prompt"), options)
+
+    def show_combat_status(self) -> None:
+        """
+        Prints the hp row of every boss in the room and of the player.
+        """
+        display.print_combat_status(
+            self.get_player().get_current_room().get_bosses(),
+            self.get_player().get_name(),
+            self.get_player().get_hp())
 
     def choose_option(self, max_no: int) -> int:
         x = display.smart_input(int)
@@ -205,10 +211,7 @@ class Game:
                                           boss_wanted.get_damage())
                 self.get_player().take_damage(self.get_player().get_damage())
             display.print_new_line()
-            display.print_combat_status(
-                self.get_player().get_current_room().get_bosses(),
-                self.get_player().get_name(),
-                self.get_player().get_hp())
+            self.show_combat_status()
             return True
         print(self.get_text("not_implemented"))
 
