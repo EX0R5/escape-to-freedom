@@ -33,26 +33,22 @@ def screenbreak(c: str) -> None:
     print(SCREEN_WIDTH * c)
 
 
-def smart_input(type_wanted: type) -> type:
+def smart_input(convert):
     """
-    Gets input from user, but checks if it is of the correct type.
+    Gets input from user and converts it with the given function.
 
     Attributes:
-    type_wanted (type): type of input expected from user
+    convert: function the input is converted with, e.g. str or int
 
     Returns:
-    the final input, converted to the correct type
+    the final input, converted by the given function
     """
     while True:
         x = input("> ")
-        if type_wanted == str:
-            return x
-        if type_wanted == int:
-            if not x.isdigit():
-                print("Please enter a valid number.")
-                continue
-            return int(x)
-        print("Not implemented yet")
+        try:
+            return convert(x)
+        except ValueError:
+            print("Please enter a valid number.")
 
 
 def print_new_line() -> None:

@@ -165,6 +165,9 @@ class Boss(Combatter):
     def get_defeat_text(self) -> str:
         return self._defeat_text
 
+    def is_monster(self) -> bool:
+        return False
+
 
 class Monster(Boss):
     """
@@ -172,3 +175,5 @@ class Monster(Boss):
 
     Additional attributes: None
     """
+    def is_monster(self) -> bool:
+        return True

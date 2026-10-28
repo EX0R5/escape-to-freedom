@@ -130,7 +130,7 @@ class Game:
             for boss in current_room.get_bosses():
                 options.append(f"{counter}. Attack {boss.get_name()}")
                 counter += 1
-                if type(boss) is person.Monster:
+                if boss.is_monster():
                     monster_present = True
         for item in self.get_player().get_inventory():
             options.append(f"{counter}. Use {item.get_name()}")
@@ -175,7 +175,7 @@ class Game:
     def choose_option(self, max_no: int) -> int:
         x = display.smart_input(int)
         if not (x > 0 and x <= max_no):
-            self.choose_option(max_no)
+            return self.choose_option(max_no)
         return x
 
     def execute_option(self, decision: int, choices: List[str]) -> bool:
