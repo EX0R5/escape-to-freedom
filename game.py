@@ -62,23 +62,25 @@ class Game:
                  "E": room["EAST"], "W": room["WEST"]}, [], [])
         self.set_maze(
             maze.Maze(rooms, rooms[self.get_config("first_room")], None))
+        entry_text = self.get_text("entry_text")
+        escape_text = self.get_text("escape_text")
+        attack_text = self.get_text("attack_text")
+        defeat_text = self.get_text("defeat_text")
         enemy_data = file.read_file("enemy_data.csv")
         for enemy in enemy_data:
             if enemy["type"] == "Monster":
                 self.get_maze().set_monster(person.Monster(
                     enemy["name"], rooms[enemy["room"]],
                     int(enemy["max_hp"]), int(enemy["max_hp"]),
-                    int(enemy["attack"]), "placeholder entry text",
-                    "placeholder escape text", "placeholder attack text",
-                    "placeholder defeat text"))
+                    int(enemy["attack"]), entry_text,
+                    escape_text, attack_text, defeat_text))
                 rooms[enemy["room"]].add_boss(self.get_maze().get_monster())
             else:
                 rooms[enemy["room"]].add_boss(person.Boss(
                     enemy["name"], rooms[enemy["room"]],
                     int(enemy["max_hp"]), int(enemy["max_hp"]),
-                    int(enemy["attack"]), "placeholder entry text",
-                    "placeholder escape text", "placeholder attack text",
-                    "placeholder defeat text"))
+                    int(enemy["attack"]), entry_text,
+                    escape_text, attack_text, defeat_text))
         player_data = file.read_file("player_data.csv")
         player = person.Player(
             player_data["Name"], self.get_maze().get_start_room(),
