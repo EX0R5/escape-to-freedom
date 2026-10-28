@@ -81,7 +81,7 @@ class Game:
                     int(enemy["max_hp"]), int(enemy["max_hp"]),
                     int(enemy["attack"]), entry_text,
                     escape_text, attack_text, defeat_text))
-        player_data = file.read_file("player_data.csv")
+        player_data = file.read_file("player_data.csv")[0]
         player = person.Player(
             player_data["Name"], self.get_maze().get_start_room(),
             int(player_data["HP"]), int(player_data["MaxHP"]),
