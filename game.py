@@ -175,7 +175,7 @@ class Game:
     def choose_option(self, max_no: int) -> int:
         x = display.smart_input(int)
         if not (x > 0 and x <= max_no):
-            self.choose_option(max_no)
+            return self.choose_option(max_no)
         return x
 
     def execute_option(self, decision: int, choices: List[str]) -> bool:
